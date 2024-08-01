@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include("./partials/head") %>
+    <title>Homepage</title>
+
+    <body>
+        <%- include("./partials/nav") %>
+            <% if (locals.blog) { %>
+                <div class="container mt-5">
+                    <h1>
+                        <%= blog.title %>
+                    </h1>
+                    <img src="/uploads/<%= blog.coverImage %>" alt="" srcset="">
+                    <div class="container">
+                        <pre><%= blog.body %></pre>
+                    </div>
+                </div>
+                <% if (blog.createdBy) { %>
+                    <div class="container m-2">
+                        <img src="<%= blog.createdBy.profileImage %>" alt="Profile Image" />
+                        <%= blog.createdBy.fullName %>
+                    </div>
+                    <% } %>
+                        <% if (locals.user) { %>
+                            <div class="container mt-2">
+                                <form method="post" action="/blogs/comment/<%= blog._id %>">
+                                    <div class="mb-3">
+                                        <input type="text" class="form-control" id="content" name="content">
+                                    </div>
+                                    <button type="submit" class="btn btn-sm btn-primary">Submit</button>
+                                </form>
+                            </div>
+                            <% } %>
+                                <% } %>
+                                    <div class="container  ">
+                                        <% comment.forEach(comment=> { %>
+                                            <img src="/uploads/<%= comment.createdBy.profileImage %>"
+                                                class="card-img-top" alt="...">
+                                            <%= comment.createdBy.fullName %>
+                                                <pre>
+  <%= comment.content %>
+   </pre>
+                                                <% }) %>
+                                    </div>
+                                    <%- include("./partials/scripts") %>
+    </body>
+    </hml>
