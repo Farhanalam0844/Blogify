@@ -36,4 +36,4 @@ app.get('/users/logout',(req,res)=>{
 
     })
 })
-app.listen(PORT,()=> console.log(`Server started at Port:${PORT}`))
+app.listen(Process.env.PORT || PORT,()=> console.log(`Server started at Port:${PORT}`))
